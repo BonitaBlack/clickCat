@@ -4,30 +4,21 @@
   <meta charset="utf-8">
   <title>Cat Clicker</title>
  <link rel="stylesheet" href="css/styles.css">
+ <script src="js/app.js"></script>
 <link rel="script" href="js/app.js">
 </head>
 <body>
 <nav></nav>
 <main></main>
-<section>
+<section id = "cat1">
   <h1>Click the Cat</h1>
-  <img id="cat" alt="green-eyed-cat" src="images/clickcat.jpg">
+  <div id = "paw">
+  <img alt="green-eyed-cat" src="images/clickcat.jpg">
+</div>
+<h3 id="question">Did you click it?</h3>
+<p id="times">Times clicked: </p>
 </section>
-<section id = "changes">
-  <h3 id="question">Did you click it?</h3>
-  <p id="times">Times clicked: </p>
+<section id = "cat2">
 </section>
-<script>
-count = 0;
-let times = document.getElementById("times");
-let cat = document.images["cat"];
-let question = document.getElementById("question");
-
-cat.onclick = function() {
-count += 1;
-times.innerHTML = "Times Clicked: " + count;
-question.innerHTML = "You Clicked the Cat!";
-};
-</script>
 </body>
 </html>
