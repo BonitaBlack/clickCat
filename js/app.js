@@ -1,48 +1,151 @@
 window.onload=function(){
-let count1=0;
-let count2=0;
-	let times = document.getElementById("times");
-	let cat = document.getElementById("paw");
-	let question = document.getElementById("question");
+/let cattery = {
+    currentCat: null,
+    cats: [
+        {
+            count : 0,
+            name : "Freya",
+            imgSrc : "images/cat1.jpg",
 
-	cat.addEventListener('click', function() {
-		count1 += 1;
-  	times.innerHTML = "Times Clicked: " + count1;
-  	question.innerHTML = "You Clicked This Cat!";
-});
-//add name of cat1
-let freya = document.createElement("p");
-let name1 = document.createTextNode("This cat's name is Freya");
-freya.appendChild(name1);
-let cat1 = document.getElementById("paw");
-cat1.appendChild(freya);
+        },
+        {
+            count : 0,
+            name : "Starlight",
+            imgSrc : "images/cat2.jpg",
 
-//add cat2
-let cat2 = document.getElementById("whisker");
-let hannah_img = document.createElement("img");
-hannah_img.src ="images/cat2.jpg";
-cat2.appendChild(hannah_img);
+        },
+        {
+            count : 0,
+            name : "Pumpkin",
+            imgSrc : "images/cat3.jpg",
 
-let hannah = document.createElement("p");
-let name2 = document.createTextNode("This cat's name is Hannah");
-hannah.appendChild(name2);
-cat2.appendChild(hannah);
+        },
+        {
+            count : 0,
+            name : "Midnight",
+            imgSrc : "images/cat4.jpg",
 
-let cln1 = question.cloneNode(true);
-cat2.appendChild(cln1).setAttribute("id", "question2");
+        },
+        {
+            count : 0,
+            name : "Sunshine",
+            imgSrc : "images/cat5.jpg",
 
-let cln2 = times.cloneNode(true);
-cat2.appendChild(cln2).setAttribute("id", "times2");
+        },
+        {
+            count : 0,
+            name : "Moonlight",
+            imgSrc : "images/cat6.jpg",
 
-//cat2.getElementTagName("h3").setAttribute("id", "times2");
-//cat2.getElementTagName("p").setAttribute("id", "question2");
-
-cat2.addEventListener('click', function()
-{
-	count2 +=1;
-	times2.innerHTML = "Times Clicked:" + count2;
-	question2.innerHTML = "You Clicked This Cat!";
+        }
+    ]
+};
 
 
-});
+/* ======= catCall ======= */
+
+var catCall = {
+
+    init: function() {
+        // set our current cat to the first one in the list
+        cattery.currentCat = cattery.cats[0];
+
+        // tell our views to initialize
+        catListView.init();
+        catView.init();
+    },
+
+    getCatNow: function() {
+        return cattery.currentCat;
+    },
+
+    getCats: function() {
+        return cattery.cats;
+    },
+
+    // set the currently-selected cat to the object passed in
+    setCatNow: function(cat) {
+        cattery.currentCat = cat;
+    },
+
+    // increments the counter for the currently-selected cat
+    counterUp: function() {
+        cattery.currentCat.count++;
+        catView.render();
+    }
+};
+
+
+var catView = {
+
+    init: function() {
+        // store pointers to our DOM elements for easy access later
+        this.catElem = document.getElementById('cat');
+        this.catNameElem = document.getElementById('catName');
+        this.catImageElem = document.getElementById('cat-img');
+        this.countElem = document.getElementById('catCount');
+
+        // on click, increment the current cat's counter
+        this.catImageElem.addEventListener('click', function(){
+            catCall.counterUp();
+        });
+
+        // render this view (update the DOM elements with the right values)
+        this.render();
+    },
+
+    render: function() {
+        // update the DOM elements with values from the current cat
+        var currentCat = catCall.getCatNow();
+        this.countElem.textContent = currentCat.count;
+        this.catNameElem.textContent = currentCat.name;
+        this.catImageElem.src = currentCat.imgSrc;
+    }
+};
+
+var catListView = {
+
+    init: function() {
+        // store the DOM element for easy access later
+        this.catListElem = document.getElementById('catList');
+
+        // render this view (update the DOM elements with the right values)
+        this.render();
+    },
+
+    render: function() {
+        var cat, elem, i;
+        // get the cats we'll be rendering from the catCall
+        var cats = catCall.getCats();
+
+        // empty the cat list
+        this.catListElem.innerHTML = '';
+
+        // loop over the cats
+        for (i = 0; i < cats.length; i++) {
+            // this is the cat we're currently looping over
+            cat = cats[i];
+
+            // make a new cat list item and set its text
+            elem = document.createElement('li');
+            elem.textContent = cat.name;
+
+            // on click, setCatNow and render the catView
+            // (this uses our closure-in-a-loop trick to connect the value
+            //  of the cat variable to the click event function)
+            elem.addEventListener('click', (function(catCopy) {
+                return function() {
+                    catCall.setCatNow(catCopy);
+                    catView.render();
+                };
+            })(cat));
+
+            // finally, add the element to the list
+            this.catListElem.appendChild(elem);
+        }
+    }
+};
+
+// make it go!
+catCall.init();
 };
