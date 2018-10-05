@@ -1,42 +1,61 @@
-window.onload=function(){
-/let cattery = {
+
+
+/*let cats = ["Freya", "Starlight", "Pumpkin","Midnight", "Sunshine", "Moonlight"]
+//build the buttons
+function createButton() 
+{	
+	let buttons = document.getElementById("buttons");
+	for(let i=0; i<cats.length; i++)
+	{
+		cat = cats[i];
+		let button = document.createElement("button");
+		button.innerHTML=cats[i];
+		buttons.appendChild(button);
+		button.setAttribute("class", cats[i]);
+		
+	};
+};
+
+createButton();*/
+
+let cattery = {
     currentCat: null,
     cats: [
         {
             count : 0,
             name : "Freya",
-            imgSrc : "images/cat1.jpg",
-
+            imgSrc : "images/Freya.jpg",
+            
         },
         {
             count : 0,
             name : "Starlight",
-            imgSrc : "images/cat2.jpg",
-
+            imgSrc : "images/Starlight.jpg",
+           
         },
         {
             count : 0,
             name : "Pumpkin",
-            imgSrc : "images/cat3.jpg",
-
+            imgSrc : "images/Pumpkin.jpg",
+            
         },
         {
             count : 0,
             name : "Midnight",
-            imgSrc : "images/cat4.jpg",
-
+            imgSrc : "images/Midnight.jpg",
+            
         },
         {
             count : 0,
             name : "Sunshine",
-            imgSrc : "images/cat5.jpg",
-
+            imgSrc : "images/Sunshine.jpg",
+           
         },
         {
             count : 0,
             name : "Moonlight",
-            imgSrc : "images/cat6.jpg",
-
+            imgSrc : "images/Moonlight.jpg",
+           
         }
     ]
 };
@@ -148,4 +167,29 @@ var catListView = {
 
 // make it go!
 catCall.init();
+
+//const cats = ["Freya", "Starlight", "Pumpkin","Midnight", "Sunshine", "Moonlight"]
+//build the buttons
+/*function createButton() 
+{	
+	let buttons = document.getElementById("buttons");
+	for(let i=0; i<cats.length; i++)
+	{
+		cat = cats[i];
+		let button = document.createElement("button");
+		button.innerHTML=cats[i];
+		buttons.appendChild(button);
+		button.setAttribute("class", cats[i]);
+		
+	};
 };
+
+createButton();*/
+
+	
+
+
+
+
+
+
